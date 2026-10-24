@@ -202,16 +202,28 @@ footer a:hover{color:var(--ink)}
 /* 100万本:画面に貼りついたまま、スクロールで数字が増える */
 .million{padding-block:0}
 .million-stage{position:relative;overflow:hidden;padding-block:clamp(72px,12vw,128px)}
-.ghost{position:absolute;left:0;top:50%;transform:translateY(-50%);font-family:var(--f-num);font-weight:700;font-size:34vw;line-height:1;color:transparent;-webkit-text-stroke:1.5px var(--line);white-space:nowrap;pointer-events:none;user-select:none}
+.million-stage{background:radial-gradient(ellipse 70% 60% at 30% 45%,rgb(255 106 19 / calc(var(--mp,1) * .32)),transparent 70%)}
+.ghost{position:absolute;left:0;top:50%;transform:translateY(-50%);font-family:var(--f-num);font-weight:700;font-size:34vw;line-height:1;color:rgb(255 106 19 / calc(var(--mp,1) * .07));-webkit-text-stroke:2px rgb(255 106 19 / calc(.18 + var(--mp,1) * .55));white-space:nowrap;pointer-events:none;user-select:none;filter:drop-shadow(0 0 calc(var(--mp,1) * 18px) rgb(255 106 19 / .5))}
+.trails{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+.flash{position:absolute;inset:0;pointer-events:none;background:radial-gradient(circle at 30% 45%,rgb(255 160 90 / .55),transparent 65%);opacity:0}
+.flash.go{animation:flash .7s ease-out}
+@keyframes flash{0%{opacity:1}100%{opacity:0}}
+.milestone{position:absolute;right:max(16px,8vw);top:22%;font-family:var(--f-display);font-size:clamp(1.4rem,4vw,2.6rem);color:#fff;background:var(--ball);padding:.25em .7em;border-radius:12px;transform:rotate(-6deg) scale(0);opacity:0;box-shadow:0 12px 40px -8px rgb(255 106 19 / .8);pointer-events:none;white-space:nowrap}
+.milestone.go{animation:stamp 1.6s cubic-bezier(.2,1.6,.4,1) forwards}
+@keyframes stamp{0%{transform:rotate(-6deg) scale(2.4);opacity:0}18%{transform:rotate(-6deg) scale(1);opacity:1}75%{transform:rotate(-6deg) scale(1);opacity:1}100%{transform:rotate(-6deg) scale(.9) translateY(-20px);opacity:0}}
 .million-inner{position:relative}
 .mnum{transform-origin:0 100%}
 .motion .million{height:260vh}
 .motion .million-stage{position:sticky;top:0;min-height:100vh;min-height:100svh;display:grid;align-items:center;padding-block:72px 40px}
 .million-inner{display:grid;gap:22px;width:100%}
-.mnum{font-family:var(--f-num);font-weight:700;font-size:clamp(3.4rem,15vw,10.5rem);line-height:.95;letter-spacing:-.01em;font-variant-numeric:tabular-nums;white-space:nowrap}
+.mnum{font-family:var(--f-num);font-weight:700;font-size:clamp(3.4rem,15vw,10.5rem);line-height:.95;letter-spacing:-.01em;font-variant-numeric:tabular-nums;white-space:nowrap;text-shadow:0 0 calc(var(--mp,1) * 50px) rgb(255 106 19 / calc(var(--mp,1) * .9));transition:color .4s ease}
+.mnum.done{color:var(--ball);text-shadow:0 0 30px rgb(255 106 19 / .9),0 0 90px rgb(255 106 19 / .6)}
+.mnum.bump{animation:bump .45s ease-out}
+@keyframes bump{0%{scale:1.12}100%{scale:1}}
 .mnum small{font-family:var(--f-body);font-weight:700;font-size:.22em;margin-left:.2em;color:var(--ink-dim);letter-spacing:0}
 .meter{position:relative;height:14px;border-radius:999px;background:var(--court-2);border:1px solid var(--line);margin-bottom:46px}
-.meter-fill{position:absolute;inset:0;border-radius:inherit;background:var(--ball);transform-origin:left;transform:scaleX(1)}
+.meter-fill{position:absolute;inset:0;border-radius:inherit;background:linear-gradient(90deg,#ff3d00,var(--ball) 60%,#ffb36b);transform-origin:left;transform:scaleX(1);box-shadow:0 0 18px rgb(255 106 19 / .7)}
+.meter-tip{position:absolute;top:50%;left:calc(var(--me,1) * 100%);width:26px;height:26px;margin:-13px 0 0 -13px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#ffb36b,var(--ball) 55%,#c94400);box-shadow:0 0 22px var(--ball),0 0 6px #fff}
 .meter-mark{position:absolute;left:var(--at);top:-6px;bottom:-6px;width:2px;background:var(--ink)}
 .meter-mark span{position:absolute;top:calc(100% + 6px);left:-2px;white-space:nowrap;font-size:.78rem;font-weight:700;line-height:1.35}
 .meter-mark small{font-weight:400;color:var(--ink-dim)}
@@ -381,11 +393,15 @@ footer a:hover{color:var(--ink)}
   <section class="million" id="million">
     <div class="million-stage">
       <div class="ghost" id="ghost" aria-hidden="true">MILLION</div>
+      <canvas class="trails" id="trails" aria-hidden="true"></canvas>
+      <div class="flash" id="flash" aria-hidden="true"></div>
+      <div class="milestone" id="milestone" aria-hidden="true"></div>
       <div class="wrap million-inner">
         <span class="label">1 → 1,000,000</span>
         <div class="mnum"><span id="mnum">1,000,000</span><small>本</small></div>
         <div class="meter" aria-hidden="true">
           <div class="meter-fill" id="mfill"></div>
+          <div class="meter-tip"></div>
           <div class="meter-mark" style="--at:3.6%"><span>MOTO 約3万6千本<br><small>2026年10月</small></span></div>
         </div>
         <h2>1本目から100万本目まで、<br>ぜんぶ数える。</h2>
@@ -575,10 +591,12 @@ footer a:hover{color:var(--ink)}
     if (million) {
       var r = million.getBoundingClientRect();
       var span = r.height - vh();
-      mp = span > 0 ? clamp(-r.top / span) : 1;
+      mp = span > 0 ? clamp(-r.top / (span * 0.8)) : 1; // 止まっている時間の8割で100万本。残りは達成の演出を見せる
       ease = mp * mp * mp; // 最初はゆっくり1本ずつ、後半で一気に増える
       mnum.textContent = fmt(Math.max(1, Math.round(1000000 * ease)));
       mfill.style.transform = 'scaleX(' + ease + ')';
+      million.style.setProperty('--mp', mp.toFixed(3));
+      million.style.setProperty('--me', ease.toFixed(4));
     }
 
     // 記録の3画面:真ん中だけ逆向きに動かして奥行きを出す
@@ -604,6 +622,94 @@ footer a:hover{color:var(--ink)}
   window.addEventListener('scroll', onScroll, { passive: true });
   window.addEventListener('resize', onScroll);
   frame();
+})();
+</script>
+
+<script>
+// 100万本の場面の派手な演出:シュートの軌道 / 区切りの「突破!」 / 100万本で弾ける
+(function(){
+  if (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  var stage = document.querySelector('.million-stage'), million = document.getElementById('million');
+  var cv = document.getElementById('trails'), ctx = cv && cv.getContext('2d');
+  if (!stage || !ctx) return;
+  var num = document.querySelector('.mnum'), flash = document.getElementById('flash'), badge = document.getElementById('milestone');
+  var W = 0, H = 0, dpr = 1, shots = [], bits = [], last = 0, acc = 0, visible = false, prevVal = 0, done = false;
+  var steps = [[1000, '1,000本 突破!'], [10000, '1万本 突破!'], [100000, '10万本 突破!'], [500000, '50万本 突破!']];
+
+  function size(){
+    dpr = Math.min(window.devicePixelRatio || 1, 2);
+    W = stage.clientWidth; H = stage.clientHeight;
+    cv.width = W * dpr; cv.height = H * dpr;
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  }
+  function mp(){ return parseFloat(million.style.getPropertyValue('--mp')) || 0; }
+
+  // 1本のシュート:左下の打つ位置から、右上のリングへ放物線
+  function spawn(){
+    var hx = W * (0.78 + Math.random() * 0.12), hy = H * (0.18 + Math.random() * 0.12);
+    shots.push({ x0: W * (0.5 + Math.random() * 0.3), y0: H * (0.75 + Math.random() * 0.3), x1: hx, y1: hy,
+      h: H * (0.25 + Math.random() * 0.35), t: 0, dur: 0.9 + Math.random() * 0.7, r: 4 + Math.random() * 5 });
+  }
+  function pos(s, t){ return [s.x0 + (s.x1 - s.x0) * t, s.y0 + (s.y1 - s.y0) * t - s.h * 4 * t * (1 - t)]; }
+  function ball(x, y, r, a){
+    ctx.globalAlpha = a * (W < 700 ? 0.45 : 1); // スマホは文字と重なるので薄く
+    ctx.beginPath(); ctx.arc(x, y, r, 0, Math.PI * 2);
+    ctx.fillStyle = '#ff6a13'; ctx.shadowColor = '#ff6a13'; ctx.shadowBlur = r * 3; ctx.fill();
+    ctx.shadowBlur = 0;
+  }
+  function burst(){
+    var r = num.getBoundingClientRect(), sr = stage.getBoundingClientRect();
+    var cx = r.left - sr.left + r.width * 0.5, cy = r.top - sr.top + r.height * 0.5;
+    for (var i = 0; i < 90; i++) {
+      var a = Math.random() * Math.PI * 2, v = 250 + Math.random() * 650;
+      bits.push({ x: cx, y: cy, vx: Math.cos(a) * v, vy: Math.sin(a) * v - 250, r: 3 + Math.random() * 7, life: 1.6 + Math.random() });
+    }
+  }
+  function pulse(text){
+    flash.classList.remove('go'); void flash.offsetWidth; flash.classList.add('go');
+    num.classList.remove('bump'); void num.offsetWidth; num.classList.add('bump');
+    if (text) { badge.textContent = text; badge.classList.remove('go'); void badge.offsetWidth; badge.classList.add('go'); }
+  }
+
+  function loop(now){
+    var dt = Math.min((now - (last || now)) / 1000, 0.05); last = now;
+    var p = mp(), val = 1000000 * p * p * p;
+
+    // 区切りを上向きに越えたとき
+    for (var i = 0; i < steps.length; i++) if (prevVal < steps[i][0] && val >= steps[i][0]) pulse(steps[i][1]);
+    if (!done && p >= 0.999) { done = true; num.classList.add('done'); pulse('100万本 達成!'); burst(); }
+    if (done && p < 0.97) { done = false; num.classList.remove('done'); }
+    prevVal = val;
+
+    // 進むほど、飛ぶボールが増える(毎秒 0.5本 → 40本)
+    acc += dt * (0.5 + 40 * p * p);
+    while (acc >= 1) { spawn(); acc--; }
+
+    ctx.clearRect(0, 0, W, H);
+    for (var k = shots.length - 1; k >= 0; k--) {
+      var s = shots[k]; s.t += dt / s.dur;
+      if (s.t >= 1) { shots.splice(k, 1); continue; }
+      for (var j = 8; j >= 1; j--) {           // 尾
+        var tt = s.t - j * 0.025; if (tt < 0) continue;
+        var q = pos(s, tt); ball(q[0], q[1], s.r * (1 - j / 10), 0.5 * (1 - j / 9));
+      }
+      var h = pos(s, s.t); ball(h[0], h[1], s.r, 1);
+    }
+    for (var b = bits.length - 1; b >= 0; b--) {
+      var o = bits[b]; o.life -= dt;
+      if (o.life <= 0 || o.y > H + 40) { bits.splice(b, 1); continue; }
+      o.vy += 900 * dt; o.x += o.vx * dt; o.y += o.vy * dt;
+      ball(o.x, o.y, o.r, Math.min(1, o.life));
+    }
+    ctx.globalAlpha = 1;
+    if (visible || bits.length) requestAnimationFrame(loop); else { last = 0; ctx.clearRect(0, 0, W, H); }
+  }
+
+  size(); window.addEventListener('resize', size);
+  new IntersectionObserver(function(es){
+    var was = visible; visible = es[0].isIntersecting;
+    if (visible && !was) { size(); requestAnimationFrame(loop); }
+  }).observe(million);
 })();
 </script>
 </body>
