@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>バスケのコソ練部 お試し部員 募集(保護者の方へ)</title>
+<meta name="robots" content="noindex">
+<meta name="description" content="バスケのコソ練部(中高生のオンライン自主練の部活)の、保護者の方向けの説明・部のルール・何か起きた時の手順です。">
+<link rel="icon" href="../img/favicon.png">
+<style>
+/* 保護者の方が落ち着いて読めるように: 明るい紙の色・読みやすい字の大きさ・スマホ1列。外のフォントやスクリプトは使わない */
+:root{
+  --paper:#fbfaf7; --card:#fff; --ink:#1d1d1f; --mute:#6e6e73; --hair:#e3e1dc;
+  --ball:#e85d0c; --ball-soft:#fff3ea;
+  --f-body:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Hiragino Kaku Gothic ProN","Noto Sans JP","Yu Gothic",system-ui,sans-serif;
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--f-body);font-size:17px;line-height:1.85;-webkit-font-smoothing:antialiased;overflow-wrap:anywhere}
+.wrap{max-width:760px;margin:0 auto;padding:0 max(18px,env(safe-area-inset-left,0px)) 0 max(18px,env(safe-area-inset-right,0px))}
+header{padding:40px 0 8px}
+.club{margin:0;color:var(--ball);font-weight:700;font-size:.95rem;letter-spacing:.04em}
+h1{font-size:clamp(1.45rem,5.2vw,2rem);line-height:1.4;margin:.3em 0 .6em;font-weight:800}
+h2{font-size:clamp(1.3rem,4.6vw,1.6rem);line-height:1.4;margin:0 0 .8em;padding-bottom:.4em;border-bottom:3px solid var(--ball);font-weight:800}
+h3{font-size:1.15rem;line-height:1.5;margin:2em 0 .6em;padding-left:.6em;border-left:4px solid var(--ball);font-weight:700}
+p{margin:.6em 0}
+ul,ol{margin:.6em 0;padding-left:1.4em}
+li{margin:.45em 0}
+li>ul,li>ol{margin:.3em 0}
+strong{font-weight:700;background:linear-gradient(transparent 62%,var(--ball-soft) 62%)}
+blockquote{margin:1em 0;padding:1em 1.2em;background:var(--ball-soft);border-radius:12px;font-size:1.05rem}
+blockquote p{margin:0}
+blockquote strong{background:none}
+a{color:var(--ball)}
+nav.toc{background:var(--card);border:1px solid var(--hair);border-radius:14px;padding:14px 18px;margin:18px 0}
+nav.toc p{margin:0 0 .3em;color:var(--mute);font-size:.9rem;font-weight:700}
+nav.toc ol{margin:0;padding-left:1.4em}
+nav.toc a{color:var(--ink);text-decoration:none;font-weight:700}
+nav.toc a:hover{color:var(--ball);text-decoration:underline}
+section{background:var(--card);border:1px solid var(--hair);border-radius:16px;padding:26px clamp(16px,4vw,32px);margin:22px 0;scroll-margin-top:12px}
+section>h3:first-of-type{margin-top:1.2em}
+.table{overflow-x:auto;margin:1em 0}
+table{border-collapse:collapse;width:100%;font-size:.97rem;line-height:1.7}
+th,td{border:1px solid var(--hair);padding:.6em .75em;text-align:left;vertical-align:top}
+thead th{background:#f3f1ec}
+tbody th{background:#faf8f4;font-weight:700;width:30%;min-width:6.5em}
+.cta{text-align:center;margin:22px 0}
+.pill{display:inline-block;background:var(--ball);color:#fff;text-decoration:none;font-weight:700;font-size:1.05rem;padding:14px 32px;border-radius:999px;min-width:min(100%,300px)}
+.pill:hover{background:#d14f05}
+.pill:focus-visible,a:focus-visible{outline:3px solid var(--ink);outline-offset:3px}
+footer{padding:8px 0 48px;text-align:center;color:var(--mute);font-size:.9rem}
+footer a{color:var(--mute)}
+@media (max-width:480px){
+  body{font-size:16px}
+  tbody th{width:auto}
+  .table table,.table tbody,.table tr,.table th,.table td{display:block;width:100%}
+  .table tr{border:1px solid var(--hair);border-radius:10px;margin:0 0 10px;overflow:hidden}
+  .table th,.table td{border:none}
+  .table thead{display:none}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header id="top">
+<p class="club">バスケのコソ練部</p>
+<h1>バスケのコソ練部 お試し部員 募集(保護者の方へ)</h1>
+<p class="cta"><a class="pill" href="https://forms.gle/kqjUWVTwUCdzdCSr9">申し込みフォームへ</a></p>
+<nav class="toc" aria-label="目次">
+<p>目次</p>
+<ol>
+<li><a href="#guide">親向け説明</a></li>
+<li><a href="#rules">部のルール</a></li>
+<li><a href="#trouble">何か起きた時の手順</a></li>
+</ol>
+</nav>
+</header>
+<main>
+<section id="guide" aria-labelledby="guide-h">
+<h2 id="guide-h">親向け説明</h2>
+<blockquote><p><strong>努力は、見えない所でする。数えるのは、ここだけ。</strong></p></blockquote>
+<h3>コソ練部って?</h3>
+<p>自主練(コソ練)をした日を、毎日みんなで報告し合う、中高生のオンライン部活です。シュートだけでなく、ドリブルや体づくりなど、リングが無い日のコソ練も報告できます。</p>
+<ul>
+<li>数えるのは<strong>「練習した日」</strong>です。シュートでもドリブルでも筋トレでも、やった日は1日。毎週、<strong>先週の自分と比べて</strong>ふり返ります。ほかの部員とは比べません(本数の多さを競う部ではありません)
+</li>
+<li><strong>アプリが無くても参加できます。</strong> iPhone なら、シュートを自動で数える無料アプリ「Million Hooper」を使うと、毎日の本数がたまり、積み重ねが目で見えます。部の中に使い方の例もたまり、運営の MOTO も同じアプリで自分の練習を報告します。アプリで数えられない場合は、手で数えた本数でも大丈夫です
+</li>
+<li><strong>週1回、全体ミーティング</strong>があります。その週に「どんな練習をしたか」「次はどんな練習をしたいか」を話し、MOTO が「質の高いコソ練とは」の考え方をお伝えします。質問は、ミーティングの中で手を挙げた人に、みんなの前でお答えします。ミーティングは声で行い、曜日・時間は運営の仕事の都合に合わせて前の週にお知らせします。参加は自由で、出られなかった人は録画で見られます(録画は撮った日から3か月で消します)
+</li>
+<li>部員どうしで、お互いの報告に反応し合う部です。順位はつけません。お互いの報告が刺激になる場所です
+</li>
+<li>休んだ日も「今日は休み」の一言で報告になります。運営から体づくりをすすめるときは、軽いものだけにします
+</li></ul>
+<h3>保護者の方へ</h3>
+<ul>
+<li><strong>「こっそり」は、学校やチームの仲間に対してです。保護者の方は、部の中を全部見られます</strong>(保護者用の見学の部屋があります)
+</li>
+<li>保護者の方は部員の部屋を<strong>見るだけ</strong>で、書き込みはできません。保護者の方の発言は保護者専用の部屋で行い、その部屋は部員からは見えません
+</li>
+<li>部を運営する大人は MOTO だけです。<strong>Discord でもインスタなどの SNS でも、MOTO は部員とも保護者の方とも個別メッセージをしません。</strong> やり取りはすべて、ほかの人から見える部屋で行います
+<ul>
+<li><strong>運営者から保護者の方へのメールは、受付・招待などのお知らせと、安全に関わる時のご連絡だけです</strong>(お子さんには個別に連絡しません)
+</li></ul>
+</li>
+<li>安全のため、部の書き込みは機械(AI)でも確認し、危ない書き込みがあると運営者(MOTO)に知らせが届きます。読むのは安全の確認のためだけです。機械が部員に返事をしたり話しかけたりすることはなく、部を運営する大人は MOTO だけです
+</li>
+<li>部員どうしの個別メッセージは禁止です。本名・学校名・チーム名・住んでいる所・顔の写真は出しません(アイコンも顔写真にしません)
+</li>
+<li>保護者だけの部屋は、ほかのご家庭の保護者の方にも見えます。ご家庭の事情など、ほかの方に見せたくないことは書かないでください
+</li>
+<li>ルール違反や、お子さんが嫌な思いをしたときは、保護者だけの部屋でお知らせください
+</li>
+<li>退部は保護者の方からお知らせください。理由は不要です
+</li>
+<li>運営へのご連絡は保護者だけの部屋で。運営は仕事をしながら運営しているため、返事は数日以内になります。ルール違反があった場合は退部していただくことがあります(部のルールは、このページの下の「部のルール」に載せています)
+</li>
+<li>お願いするのは、その日の練習の報告(何をしたかの一言。アプリの画面のスクショや本数を付けてもよい)だけです。お試しは5人と少ないので、お試しの間は、できるだけ毎日の報告をお願いしています(短くて大丈夫です)
+</li>
+<li>MOTO は仕事の合間に部の中を見ていますが、すべての報告に返事をするわけではありません。部員どうしで反応し合う部にしています
+</li>
+<li>声の部屋は、MOTO がいる時だけ開けます
+</li>
+<li>何か起きたときの対応は、このページの「<a href="#trouble">何か起きた時の手順</a>」をご覧ください
+</li>
+<li>練習やフォームの動画は、出したい部員だけ出せます(出さなくても大丈夫です)。<strong>顔が写らない撮り方</strong>(後ろや横から、首から下)に限ります。アドバイスがしやすくなるためです
+</li>
+<li>部の中の報告・日記・動画は、スクショなどで部の外に出さないルールです(部員・保護者とも)
+</li></ul>
+<h3>運営者</h3>
+<p><strong>MOTO</strong> — 看護師 / 高校は桐生第一高校(バスケ部)出身。母校の男子バスケ部は、今年もウインターカップ(12月開幕)の群馬県代表 / バスケ歴17年 / 男性<br>YouTube「シュート100万回」で、シュート100万本に挑戦しながら、シュートの悩みを数字と一流選手の考え方で解いています。<br>※ ケガや体の相談には、ここではお答えできません。医療機関にご相談ください。</p>
+<h3>お試しの内容</h3>
+<div class="table"><table><tbody><tr><th>対象</th><td><strong>13歳以上</strong>の中学生・高校生</td></tr><tr><th>人数</th><td><strong>1期は5人まで</strong>(6人目からは<strong>順番待ち</strong>として受け付け、2期で優先してご案内します)。3人そろえば始めます</td></tr><tr><th>期間</th><td>4週間(始まる日は、準備ができ次第メールでお知らせします)</td></tr><tr><th>費用</th><td><strong>無料</strong>(将来は有料になる予定です。その時は先にお知らせします)</td></tr><tr><th>使うもの</th><td>スマホ・Discord(13歳から使えるアプリ)。iPhone ならシュートを数えるアプリ「Million Hooper」(無料)とスマホ用の三脚(アプリ・三脚が無くても参加できます)</td></tr><tr><th>お願い</th><td>できるだけ毎日の報告(短くて大丈夫。練習しなかった日は「今日は休み」の一言で OK)/ 週1回の全体ミーティング / 最後に短いアンケート</td></tr><tr><th>ミーティングの録画</th><td>週1回のミーティングは録画し、出られなかった部員が見られるように<strong>部の中だけ</strong>に置きます。部の外(YouTube など)には出しません。録画は撮った日から3か月で消します。お子さんの声が入るため、申し込みフォームで同意をいただきます</td></tr></tbody></table></div>
+<h3>参加の流れ</h3>
+<ol>
+<li><strong>保護者の方から</strong>、申し込みフォームでお申し込みください(インスタなどでお子さんから個別メッセージをもらっても、お返事はしていません。MOTO は誰とも個別メッセージをしないためです。お申し込みは必ず保護者の方から、フォームでお願いします)
+</li>
+<li>保護者の方の同意を確認します
+</li>
+<li>お子さんに Discord の招待をお送りします。保護者の方には見学の部屋の招待をお送りします
+</li></ol>
+<h3>お約束できること・できないこと</h3>
+<ul>
+<li>試合で勝てる・上手くなる、という結果はお約束できません
+</li>
+<li>お約束するのは、<strong>運営がやること</strong>です。週1回の全体ミーティングを開き、「質の高いコソ練とは」の考え方をお伝えする・ミーティングで手を挙げた人の質問に、みんなの前で答える
+</li>
+<li>お約束できないこと: すべての報告への返事・個別のご相談(質問はミーティングでみんなの前で受けます)
+</li>
+<li>目指すのは、<strong>何を・どれだけ・どうやって練習するかを、自分で決めて続けられるようになること</strong>です
+</li></ul>
+</section>
+<section id="rules" aria-labelledby="rules-h">
+<h2 id="rules-h">バスケのコソ練部 部のルール</h2>
+<h3>部員のルール</h3>
+<ol>
+<li>本名・学校名・チーム名・住んでいる所・顔の写真は出さない(呼び名で参加。アイコンも顔写真にしない)
+</li>
+<li>部員どうしの個別メッセージ(DM)はしない。話すのは部の部屋だけ
+</li>
+<li>報告は、今日やった練習を一言で書く。シュートでもドリブルでも筋トレでも、やった日が「練習した日」の1日。<br>本数や時間・アプリの画面のスクショは、付けたい人だけで OK(アプリで数えられない人は、自分で数えた数字で OK)。休んだ日も「今日は休み」の一言で報告になる。お試しの間は、できるだけ毎日報告する(短くて大丈夫)
+</li>
+<li>ほかの部員の報告をばかにしない。順位はつけない。人とは比べず、毎週、先週の自分と比べる。ほかの人の報告には反応して、まねしたい所を見つける
+</li>
+<li>保護者の方も部員の部屋を見ています(書き込みはしません)
+</li>
+<li>嫌なことを言われた・知らない人から DM が来たときは、返事をしないで、おうちの人に話す。おうちの人から運営に伝わります
+</li>
+<li><strong>部の中のことは、外に出さない。</strong> ほかの部員の報告・日記・動画を、スクショや保存で部の外(SNS・友だち)に出さない
+</li>
+<li>練習やフォームの動画は出してよい。ただし顔が写らないように撮る(後ろ・横から、首から下)。ほかの人やチーム名が写るものは出さない
+</li></ol>
+<h3>運営(MOTO)の約束</h3>
+<ol>
+<li><strong>Discord でもインスタなどの SNS でも、MOTO は誰とも個別メッセージ(DM)をしない。</strong> 部員とも保護者とも、やり取りはすべて、ほかの人から見える部屋で行う。<br>運営者から保護者の方へのメールは、受付・招待などのお知らせと、安全に関わる時のご連絡だけ(お子さんには個別に連絡しない)
+</li>
+<li>部員から個別の連絡(DM)が来ても、返事はしない。「相談は #相談 か、週1回のミーティングで」という案内は、固定の投稿(#ようこそ のよくある質問・#相談 の最初の投稿)でしておく
+</li>
+<li>ケガや体の相談にはお答えしない(医療機関へ)
+</li>
+<li>体づくりをすすめるときは、軽いものだけにする(成長期のやりすぎを防ぐ)
+</li>
+<li>週1回の全体ミーティングを声で開く。曜日・時間は前の週にお知らせする。参加は自由。質問は、手を挙げた人にみんなの前で答える(個別の相談は受けない)。先週の自分との比べ方も、ここで話す
+</li>
+<li>部の中は仕事の合間に見るが、すべての報告に返事はしない。部員どうしで反応し合う部にする
+</li>
+<li>声の部屋は、MOTO がいる時だけ開ける
+</li>
+<li>何か起きたときの対応: このページの「<a href="#trouble">何か起きた時の手順</a>」のとおり
+</li>
+<li>ミーティングは録画し、出られなかった部員が見られるように部の中だけに置く。部の外(YouTube など)には出さない。録画は撮った日から3か月で消す
+</li>
+<li>安全のため、部の書き込みは機械(AI)でも確認し、危ない書き込みは運営者に知らせが届くようにする。読むのは安全の確認のためだけ。機械が部員に返事をすることはない
+</li></ol>
+<h3>保護者の方へのルール</h3>
+<ol>
+<li>部員の部屋は見るだけ(書き込みはできません)。発言は保護者だけの部屋で
+</li>
+<li>保護者だけの部屋は、ほかのご家庭の保護者の方にも見えます。ほかの方に見せたくないことは書かないでください
+</li>
+<li>運営への連絡は保護者だけの部屋で。<strong>運営は仕事をしながら運営しているため、返事は数日以内になります</strong>(すぐにはお返事できません)
+</li>
+<li>ルール違反や、お子さんが嫌な思いをしたときは、保護者だけの部屋でお知らせください。指導の中身への口出しはお受けしません
+</li></ol>
+<h3>ルール違反</h3>
+<ul>
+<li>ルール違反があった場合は、退部していただくことがあります(部員・保護者とも)
+</li></ul>
+</section>
+<section id="trouble" aria-labelledby="trouble-h">
+<h2 id="trouble-h">何か起きた時の手順(保護者の方へ)</h2>
+<p>バスケのコソ練部で、困ったことや危ないことが起きた時に、運営者が何をするかをまとめました。<br>運営する大人は MOTO 1人です。仕事の合間に見ているため、すぐに気づけない時間があります。<br>そのため、<strong>安全のため、部の書き込みは機械(AI)でも確認し、危ない書き込みは運営者に知らせが届くようにしています。</strong> 読むのは安全の確認のためだけで、AI がお子さんに返事をすることはありません。</p>
+<h3>運営者がすること</h3>
+<div class="table"><table><thead><tr><th>こんな時</th><th>運営者がすること</th></tr></thead><tbody><tr><th><strong>命や体に関わること、性的な書き込み、外で会おうとする誘い、部員でない大人がまぎれ込んだ時</strong></th><td>確認でき次第、書き込みを消し、関わった人を部から外します。<strong>保護者の方へ、部のメールでご連絡します。</strong> 必要な時は警察や児童相談所に相談します</td></tr><tr><th>悪口やからかいが続く、本名・学校名・顔が出た、部員どうしの個別メッセージ</th><td>確認でき次第、書き込みを消し、部の部屋でルールを伝えます。くり返す時は保護者の方へご連絡し、それでも続く時は退部をお願いすることがあります</td></tr><tr><th>言い合いや、部と関係ない話で荒れた時</th><td>部の部屋でルールを短く伝えます</td></tr></tbody></table></div>
+<ul>
+<li>どの場合も、<strong>何があったかを後で説明できるよう、消す前に記録を残します。</strong> 記録は記録した日から3か月以内に消します。命や安全に関わり、警察などに伝える必要がある時を除いて、外には出しません。
+</li>
+<li>ほかの部員の前で、誰がしたかを名指しすることはありません。
+</li>
+<li><strong>お子さんと個別にやり取りすることはありません。</strong> 運営者から保護者の方へのメールは、受付・招待などのお知らせと、安全に関わる時のご連絡だけです(お子さんには個別に連絡しません)。
+</li></ul>
+<h3>保護者の方・お子さんが困った時</h3>
+<ul>
+<li>部の中で嫌な思いをした時は、保護者の部屋に書き込んでください。ほかのご家庭にも見えるので、名前は出さずに「こういうことがありました」で大丈夫です。
+</li>
+<li>部の外の窓口(お子さんにも部の中で案内しています)
+<ul>
+<li>命の危険・犯罪: <strong>110</strong>
+</li>
+<li>いじめ・悩み(お子さん本人から、24時間): 24時間子供SOSダイヤル <strong>0120-0-78310</strong>
+</li>
+<li>虐待の心配: 児童相談所 <strong>189</strong>
+</li>
+<li>警察に相談だけしたい時: <strong>#9110</strong>
+</li></ul>
+</li></ul>
+</section>
+</main>
+<p class="cta"><a class="pill" href="https://forms.gle/kqjUWVTwUCdzdCSr9">申し込みフォームへ</a></p>
+<footer><a href="#top">ページの上へ</a></footer>
+</div>
+</body>
+</html>
