@@ -467,7 +467,7 @@ footer a{color:var(--mute)}
 <p class="cta"><a class="pill" href="https://forms.gle/kqjUWVTwUCdzdCSr9">申し込みフォームへ(保護者の方)</a></p>
 </section>
 </main>
-<footer><a href="#top">ページの上へ</a></footer>
+<footer><p class="count-note">このページは、見られた回数を数えています(名前やメールなど、あなたが誰かは集めません)</p><a href="#top">ページの上へ</a></footer>
 </div>
 <script>
 (function(){
@@ -496,6 +496,49 @@ footer a{color:var(--mute)}
     shareBtn.textContent='一言とURLをコピーする';
     shareBtn.addEventListener('click',copy);
     copyBtn.parentNode.style.display='none';
+  }
+})();
+</script>
+<script>
+!function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.crossOrigin="anonymous",p.async=!0,p.src=s.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="init capture register register_once register_for_session unregister unregister_for_session getFeatureFlag getFeatureFlagPayload isFeatureEnabled reloadFeatureFlags updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures on onFeatureFlags onSessionId getSurveys getActiveMatchingSurveys renderSurvey canRenderSurvey getNextSurveyStep identify setPersonProperties group resetGroups setPersonPropertiesForFlags resetPersonPropertiesForFlags setGroupPropertiesForFlags resetGroupPropertiesForFlags reset get_distinct_id getGroups get_session_id get_session_replay_url alias set_config startSessionRecording stopSessionRecording sessionRecordingStarted captureException loadToolbar get_property getSessionProperty createPersonProfile opt_in_capturing opt_out_capturing has_opted_in_capturing has_opted_out_capturing clear_opt_in_out_capturing debug".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+(function(){
+  var from='', ref='';
+  try{ from=(new URLSearchParams(location.search).get('from')||'').toLowerCase(); }catch(e){}
+  if(!/^[a-z0-9_-]{1,32}$/.test(from)) from='';
+  try{ ref=document.referrer?new URL(document.referrer).hostname:''; }catch(e){}
+  var source=from||ref||'direct';
+  var KEEP_URL=location.origin+location.pathname;  // URL の ? から後ろ(fbclid など)は送らない(?from は source に入れてある)
+  posthog.init('phc_tXd5u6NeRtXmTd8XBvj2oXdZVGeygDyuypyszqoXLHe9',{
+    api_host:'https://us.i.posthog.com',
+    persistence:'memory', person_profiles:'identified_only',
+    autocapture:false, capture_pageview:false, capture_pageleave:false,
+    disable_session_recording:true, disable_surveys:true, disable_web_experiments:true,
+    enable_heatmaps:false, capture_heatmaps:false, capture_dead_clicks:false, rageclick:false,
+    capture_performance:false, capture_exceptions:false,
+    disable_external_dependency_loading:true, advanced_disable_feature_flags:true,
+    save_campaign_params:false, save_referrer:false,
+    mask_all_text:true, mask_all_element_attributes:true,
+    before_send:function(ev){
+      if(!ev) return ev;
+      var p=ev.properties||{};
+      // 前のページの URL まるごと・入口の URL(fbclid などの飾り付き)・広告の印は送らない
+      for(var k in p){ if(/^[$](session_entry_|initial_)|referrer$|clid$|^utm_|^[$](raw_user_agent|set|set_once)$/.test(k)) delete p[k]; }
+      p.$current_url=KEEP_URL;
+      delete ev.$set; delete ev.$set_once;
+      return ev;
+    }
+  });
+  var base={from:from, ref_domain:ref, source:source};
+  posthog.capture('kosoren_viewed', base);
+  var links=document.querySelectorAll('a[href="https://forms.gle/kqjUWVTwUCdzdCSr9"]');
+  for(var i=0;i<links.length;i++){
+    (function(a,name){
+      a.addEventListener('click',function(){
+        var props={button:name};
+        for(var k in base) props[k]=base[k];
+        try{ posthog.capture('kosoren_apply_clicked', props, {transport:'sendBeacon', send_instantly:true}); }catch(e){}
+      });
+    })(links[i], i===0?'upper':(i===links.length-1?'lower':'middle'+i));
   }
 })();
 </script>
